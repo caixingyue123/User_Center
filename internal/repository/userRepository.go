@@ -52,6 +52,16 @@ func (r *UserRepository) List(page, pagesize int) ([]model.User, int64, error) {
 	return users, total, nil
 }
 
+func (r *UserRepository) UpdateProfile(id int64, nickname, email, phone, avatar string) error {
+	updates := map[string]any{
+		"nickname": nickname,
+		"email":    email,
+		"phone":    phone,
+		"avatar":   avatar,
+	}
+	return r.db.Model(&model.User{}).Where("id = ?", id).Updates(updates).Error
+}
+
 func (r *UserRepository) DeleteByID(id int64) error {
 	return r.db.Delete(&model.User{}, id).Error
 }

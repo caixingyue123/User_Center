@@ -1,0 +1,9 @@
+{"type":"server-started","port":63598,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:63598","screen_dir":"/Users/caixingyue/User_Center/.superpowers/brainstorm/76650-1781665739/content","state_dir":"/Users/caixingyue/User_Center/.superpowers/brainstorm/76650-1781665739/state"}
+{"type":"screen-added","file":"/Users/caixingyue/User_Center/.superpowers/brainstorm/76650-1781665739/content/visual-style.html"}
+{"source":"user-event","type":"click","text":"👤 用户中心\n        Dashboard\n        \n          📊 用户管理\n          👤 个人中心\n        \n      \n      \n        \n          1,234\n          总用户数\n        \n        \n          56\n          今日新增\n        \n      \n    \n    \n      A · 现代渐变紫\n      紫色渐变主色调，年轻活力，侧边栏深色+内容区浅色，适合偏互联网产品的气质","choice":"a","id":null,"timestamp":1781665875654}
+{"source":"user-event","type":"click","text":"👤 用户中心\n        Dashboard\n        \n          📊 用户管理\n          👤 个人中心\n        \n      \n      \n        \n          1,234\n          总用户数\n        \n        \n          56\n          今日新增\n        \n      \n    \n    \n      A · 现代渐变紫\n      紫色渐变主色调，年轻活力，侧边栏深色+内容区浅色，适合偏互联网产品的气质","choice":"a","id":null,"timestamp":1781665908343}
+{"type":"screen-added","file":"/Users/caixingyue/User_Center/.superpowers/brainstorm/76650-1781665739/content/waiting.html"}
+{"type":"screen-added","file":"/Users/caixingyue/User_Center/.superpowers/brainstorm/76650-1781665739/content/layout.html"}
+{"type":"screen-added","file":"/Users/caixingyue/User_Center/.superpowers/brainstorm/76650-1781665739/content/component-tree.html"}
+{"type":"screen-added","file":"/Users/caixingyue/User_Center/.superpowers/brainstorm/76650-1781665739/content/pages.html"}
+{"type":"server-stopped","reason":"idle timeout"}

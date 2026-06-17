@@ -1,0 +1,118 @@
+<h2>选择你喜欢的视觉风格</h2>
+<p class="subtitle">这会决定整个用户中心的设计方向。以下 4 种风格都基于 Element Plus，各有不同气质。</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px 8px 0 0; padding: 40px 24px 20px; color: white; min-height: 160px;">
+        <div style="font-size: 14px; opacity: 0.8; margin-bottom: 4px;">👤 用户中心</div>
+        <div style="font-size: 24px; font-weight: 700; margin-bottom: 16px;">Dashboard</div>
+        <div style="display: flex; gap: 8px;">
+          <div style="background: rgba(255,255,255,0.2); border-radius: 6px; padding: 4px 10px; font-size: 12px;">📊 用户管理</div>
+          <div style="background: rgba(255,255,255,0.2); border-radius: 6px; padding: 4px 10px; font-size: 12px;">👤 个人中心</div>
+        </div>
+      </div>
+      <div style="background: #f8f9ff; padding: 20px 24px; display: flex; gap: 12px;">
+        <div style="background: white; border-radius: 8px; padding: 14px 16px; box-shadow: 0 2px 8px rgba(102,126,234,0.08); flex: 1; text-align: center;">
+          <div style="font-size: 24px; font-weight: 700; color: #667eea;">1,234</div>
+          <div style="font-size: 11px; color: #999; margin-top: 4px;">总用户数</div>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px 16px; box-shadow: 0 2px 8px rgba(102,126,234,0.08); flex: 1; text-align: center;">
+          <div style="font-size: 24px; font-weight: 700; color: #764ba2;">56</div>
+          <div style="font-size: 11px; color: #999; margin-top: 4px;">今日新增</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A · 现代渐变紫</h3>
+      <p>紫色渐变主色调，年轻活力，侧边栏深色+内容区浅色，适合偏互联网产品的气质</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background: #fff; border-bottom: 1px solid #e8e8e8; border-radius: 8px 8px 0 0; padding: 20px 24px; min-height: 160px;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+          <div style="width: 32px; height: 32px; background: #1677ff; border-radius: 6px;"></div>
+          <div style="font-size: 16px; font-weight: 600; color: #1a1a1a;">用户中心</div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <div style="background: #e6f4ff; color: #1677ff; border-radius: 4px; padding: 4px 10px; font-size: 12px; font-weight: 500;">📊 用户管理</div>
+          <div style="background: #f5f5f5; color: #666; border-radius: 4px; padding: 4px 10px; font-size: 12px;">👤 个人中心</div>
+        </div>
+      </div>
+      <div style="background: #fafafa; padding: 20px 24px; display: flex; gap: 12px;">
+        <div style="background: white; border: 1px solid #e8e8e8; border-radius: 6px; padding: 14px 16px; flex: 1;">
+          <div style="font-size: 11px; color: #999; margin-bottom: 4px;">总用户数</div>
+          <div style="font-size: 24px; font-weight: 700; color: #1a1a1a;">1,234</div>
+        </div>
+        <div style="background: white; border: 1px solid #e8e8e8; border-radius: 6px; padding: 14px 16px; flex: 1;">
+          <div style="font-size: 11px; color: #999; margin-bottom: 4px;">今日新增</div>
+          <div style="font-size: 24px; font-weight: 700; color: #1a1a1a;">56</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B · 清爽专业蓝</h3>
+      <p>经典企业后台白+蓝配色，克制、专业、可信赖，适合偏正式的管理系统</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background: #1a1a2e; border-radius: 8px 8px 0 0; padding: 24px; color: #e0e0e0; min-height: 160px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+          <div style="width: 8px; height: 8px; background: #00d2ff; border-radius: 50%; box-shadow: 0 0 8px #00d2ff;"></div>
+          <div style="font-size: 15px; font-weight: 600; color: #fff;">用户中心</div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <div style="border: 1px solid #00d2ff; color: #00d2ff; border-radius: 4px; padding: 4px 10px; font-size: 12px;">📊 用户管理</div>
+          <div style="border: 1px solid #444; color: #888; border-radius: 4px; padding: 4px 10px; font-size: 12px;">👤 个人中心</div>
+        </div>
+      </div>
+      <div style="background: #16213e; padding: 20px 24px; display: flex; gap: 12px; border-radius: 0 0 8px 8px;">
+        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 14px 16px; flex: 1; text-align: center;">
+          <div style="font-size: 24px; font-weight: 700; color: #00d2ff; font-family: monospace;">1,234</div>
+          <div style="font-size: 11px; color: #666; margin-top: 4px;">总用户数</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 14px 16px; flex: 1; text-align: center;">
+          <div style="font-size: 24px; font-weight: 700; color: #00d2ff; font-family: monospace;">56</div>
+          <div style="font-size: 11px; color: #666; margin-top: 4px;">今日新增</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C · 暗黑科技风</h3>
+      <p>深色主题，霓虹点缀，适合技术极客或个人开发者项目</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="d" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 8px 8px 0 0; padding: 24px; min-height: 160px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+          <div style="width: 28px; height: 28px; background: white; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center;">👤</div>
+          <div style="font-size: 16px; font-weight: 600; color: #333;">用户中心</div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <div style="background: white; border-radius: 20px; padding: 6px 14px; font-size: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">📊 用户管理</div>
+          <div style="background: white; border-radius: 20px; padding: 6px 14px; font-size: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">👤 个人中心</div>
+        </div>
+      </div>
+      <div style="background: white; padding: 20px 24px; display: flex; gap: 12px;">
+        <div style="background: #f8f9fa; border-radius: 12px; padding: 14px 16px; flex: 1; text-align: center;">
+          <div style="font-size: 28px; font-weight: 700; color: #333;">1,234</div>
+          <div style="font-size: 11px; color: #999; margin-top: 4px;">总用户数</div>
+        </div>
+        <div style="background: #f8f9fa; border-radius: 12px; padding: 14px 16px; flex: 1; text-align: center;">
+          <div style="font-size: 28px; font-weight: 700; color: #333;">56</div>
+          <div style="font-size: 11px; color: #999; margin-top: 4px;">今日新增</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>D · 极简圆润白</h3>
+      <p>大面积留白+柔和阴影+大圆角，Apple 设计风格，适合追求简洁高级感的项目</p>
+    </div>
+  </div>
+</div>

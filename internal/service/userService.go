@@ -71,6 +71,15 @@ func (s *UserService) Login(req *request.LoginReq) (*model.User, error) {
 	return user, nil
 }
 
+func (s *UserService) UpdateProfile(id int64, req *request.UpdateProfileReq) error {
+	_, err := s.userRepo.GetByID(id)
+	if err != nil {
+		return err
+	}
+	return s.userRepo.UpdateProfile(id, req.Nickname, req.Email, req.Phone, req.Avatar)
+
+}
+
 func (s *UserService) GetByID(id int64) (*model.User, error) {
 	return s.userRepo.GetByID(id)
 }

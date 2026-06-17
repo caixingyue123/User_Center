@@ -1,0 +1,97 @@
+<h2>组件树 & 数据流</h2>
+<p class="subtitle">从根组件到叶子组件，一层层拆解。状态管理用 Pinia，API 层统一封装。</p>
+
+<h3>🌳 组件树</h3>
+<div class="section">
+<pre style="background: #1a1a2e; color: #e0e0e0; padding: 20px; border-radius: 10px; font-size: 13px; line-height: 1.8; overflow-x: auto;">
+App.vue
+├── <span style="color: #667eea;">&lt;router-view&gt;</span>                    ← 路由出口
+│
+├── [未登录路由]
+│   ├── LoginPage.vue              登录页
+│   └── RegisterPage.vue           注册页
+│
+└── [已登录路由]  ← 套 AdminLayout.vue
+    │
+    ├── AdminLayout.vue             <span style="color: #666;">// 侧边栏 + 顶栏 + 内容区</span>
+    │   ├── SidebarNav.vue          <span style="color: #666;">// 深色侧边栏，logo + 菜单</span>
+    │   ├── TopHeader.vue           <span style="color: #666;">// 面包屑 + 用户头像下拉</span>
+    │   └── &lt;router-view&gt;            <span style="color: #666;">// 内容区，以下页面在此渲染</span>
+    │       ├── DashboardPage.vue   <span style="color: #666;">// 统计卡片 + 快捷入口</span>
+    │       │   └── StatsCard.vue   <span style="color: #666;">// 可复用的统计卡片</span>
+    │       ├── UserListPage.vue    <span style="color: #666;">// 表格 + 分页 + 搜索 + 删除</span>
+    │       └── ProfilePage.vue     <span style="color: #666;">// 个人信息卡片 + 编辑表单</span>
+    │
+    └── [共享公共组件]
+        ├── AppIcon.vue             <span style="color: #666;">// 图标封装</span>
+        └── ConfirmDialog.vue       <span style="color: #666;">// 确认弹窗（删除等操作复用）</span>
+</pre>
+</div>
+
+<h3>🗂️ 目录结构</h3>
+<div class="section">
+<pre style="background: #1a1a2e; color: #e0e0e0; padding: 20px; border-radius: 10px; font-size: 13px; line-height: 1.8; overflow-x: auto;">
+frontend/
+├── index.html
+├── package.json
+├── vite.config.ts              <span style="color: #666;">// proxy → :8080</span>
+├── tsconfig.json
+├── src/
+│   ├── main.ts                 <span style="color: #666;">// 入口，注册 router/pinia/element-plus</span>
+│   ├── App.vue
+│   ├── router/
+│   │   └── index.ts            <span style="color: #666;">// 路由配置 + 导航守卫</span>
+│   ├── stores/
+│   │   ├── user.ts             <span style="color: #666;">// 用户状态：token, userInfo</span>
+│   │   └── app.ts              <span style="color: #666;">// 应用状态：侧边栏折叠, loading</span>
+│   ├── api/
+│   │   ├── request.ts          <span style="color: #666;">// axios 实例，拦截器，统一错误处理</span>
+│   │   └── user.ts             <span style="color: #666;">// 用户相关 API 调用</span>
+│   ├── pages/
+│   │   ├── login/
+│   │   │   └── LoginPage.vue
+│   │   ├── register/
+│   │   │   └── RegisterPage.vue
+│   │   ├── dashboard/
+│   │   │   └── DashboardPage.vue
+│   │   ├── users/
+│   │   │   └── UserListPage.vue
+│   │   └── profile/
+│   │       └── ProfilePage.vue
+│   ├── layouts/
+│   │   └── AdminLayout.vue
+│   ├── components/
+│   │   ├── SidebarNav.vue
+│   │   ├── TopHeader.vue
+│   │   ├── StatsCard.vue
+│   │   └── ConfirmDialog.vue
+│   └── utils/
+│       └── token.ts            <span style="color: #666;">// localStorage token 读写</span>
+</pre>
+</div>
+
+<h3>🔄 数据流</h3>
+<div style="display: flex; gap: 16px; margin-top: 12px;">
+  <div style="flex: 1; background: #f8f9ff; border-radius: 10px; padding: 20px;">
+    <h4 style="margin-top: 0;">登录流程</h4>
+    <div style="font-size: 13px; color: #555; line-height: 2;">
+      ① LoginPage 输入用户名密码<br/>
+      ② 调用 <code style="background:#e8eaff;padding:2px 6px;border-radius:4px;">api/user.ts → POST /api/v1/login</code><br/>
+      ③ 后端返回 <code style="background:#e8eaff;padding:2px 6px;border-radius:4px;">{user, token}</code><br/>
+      ④ <code style="background:#e8eaff;padding:2px 6px;border-radius:4px;">stores/user.ts</code> 存 token + userInfo<br/>
+      ⑤ <code style="background:#e8eaff;padding:2px 6px;border-radius:4px;">utils/token.ts</code> 写 localStorage<br/>
+      ⑥ router 跳转 /dashboard
+    </div>
+  </div>
+  <div style="flex: 1; background: #f8f9ff; border-radius: 10px; padding: 20px;">
+    <h4 style="margin-top: 0;">API 请求统一链路</h4>
+    <div style="font-size: 13px; color: #555; line-height: 2;">
+      组件调用 → <code style="background:#e8eaff;padding:2px 6px;border-radius:4px;">api/user.ts</code><br/>
+      → <code style="background:#e8eaff;padding:2px 6px;border-radius:4px;">request.ts</code> axios 实例<br/>
+      → <span style="color:#667eea;">请求拦截器</span>：自动带 Authorization<br/>
+      → <span style="color:#667eea;">Vite proxy</span>：/api → :8080<br/>
+      → <span style="color:#ff4d4f;">响应拦截器</span>：统一处理 code≠0<br/>
+      → 401 → 清除 token → 跳登录
+    </div>
+  </div>
+</div>

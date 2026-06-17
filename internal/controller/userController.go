@@ -2,9 +2,11 @@ package controller
 
 import (
 	"strconv"
+	"user/internal/middleware"
 	"user/internal/request"
 	"user/internal/service"
 	"user/pkg/ecode"
+	auth "user/pkg/jwt"
 	"user/pkg/response"
 
 	"github.com/gin-gonic/gin"
@@ -47,9 +49,14 @@ func (c *UserController) Login(ctx *gin.Context) {
 		return
 	}
 
+	token, err := auth.GenerateToken(user.ID, user.Username)
+	if err != nil {
+		response.Fail(ctx, ecode.InternalError, "Token 生成失败")
+		return
+	}
 	response.Success(ctx, gin.H{
 		"user":  user,
-		"token": "这里后面替换成真实 JWT",
+		"token": token,
 	})
 }
 
@@ -72,6 +79,57 @@ func (c *UserController) List(ctx *gin.Context) {
 		"page_size": req.PageSize,
 	})
 
+}
+
+func (c *UserController) UpdateProfile(ctx *gin.Context) {
+	userIDValue, exists := ctx.Get(middleware.CurrentUserIDKey)
+	if !exists {
+		response.Fail(ctx, ecode.TokenInvalid, "未获取到登录用户")
+		return
+	}
+
+	userID, ok := userIDValue.(int64)
+	if !ok {
+		response.Fail(ctx, ecode.TokenInvalid, "用户 ID 类型错误")
+		return
+	}
+
+	var req request.UpdateProfileReq
+	if err := ctx.ShouldBindJSON(&req); err != nil {
+		response.Fail(ctx, ecode.ParamError, "参数错误")
+		return
+	}
+	if err := c.userService.UpdateProfile(userID, &req); err != nil {
+		response.Fail(ctx, ecode.UserNotFound, "更新用户信息失败")
+		return
+	}
+	user, err := c.userService.GetByID(userID)
+	if err != nil {
+		response.Fail(ctx, ecode.UserNotFound, "用户不存在")
+	}
+	
+	response.Success(ctx, user)
+
+}
+
+func (c *UserController) GetProfile(ctx *gin.Context) {
+	userIDVal, exit := ctx.Get(middleware.CurrentUserIDKey)
+	if !exit {
+		response.Fail(ctx, ecode.ParamError, "未获取到登陆用户")
+		return
+	}
+	userID, ok := userIDVal.(int64)
+	if !ok {
+		response.Fail(ctx, ecode.TokenInvalid, "用户ID类型错误")
+		return
+	}
+	user, err := c.userService.GetByID(userID)
+	if err != nil {
+		response.Fail(ctx, ecode.UserNotFound, "用户不存在")
+		return
+	}
+
+	response.Success(ctx, user)
 }
 
 func (c *UserController) Delete(ctx *gin.Context) {

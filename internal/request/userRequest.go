@@ -13,6 +13,13 @@ type RegisterReq struct {
 	Phone    string `json:"phone" binding:"omitempty"`
 }
 
+type UpdateProfileReq struct {
+	Nickname string `json:"nickname" binding:"omitempty,max=32"`
+	Email    string `json:"email" binding:"omitempty,email"`
+	Phone    string `json:"phone" binding:"omitempty"`
+	Avatar   string `json:"avatar" binding:"omitempty"`
+}
+
 type ListUsersReq struct {
 	Page     int `form:"page" binding:"required,min=1"`
 	PageSize int `form:"page_size" binding:"required,min=1,max=100"`

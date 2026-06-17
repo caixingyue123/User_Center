@@ -1,0 +1,187 @@
+<h2>页面详细设计</h2>
+<p class="subtitle">5 个页面的布局、关键交互和 Element Plus 组件选用</p>
+
+<div class="section">
+  <h3>🔐 登录页 & 注册页</h3>
+  <p style="font-size: 13px; color: #666; margin-bottom: 12px;">全屏居中卡片式，脱离 AdminLayout，紫色渐变背景</p>
+  <div class="split">
+    <div class="mockup">
+      <div class="mockup-header">登录页</div>
+      <div class="mockup-body">
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; text-align: center; min-height: 320px; display: flex; align-items: center; justify-content: center;">
+          <div style="background: white; border-radius: 16px; padding: 32px 28px; width: 320px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);">
+            <div style="font-size: 22px; font-weight: 700; margin-bottom: 4px; color: #1a1a2e;">👤 用户中心</div>
+            <div style="font-size: 12px; color: #999; margin-bottom: 24px;">欢迎回来，请登录</div>
+            <div style="margin-bottom: 14px;">
+              <div style="font-size: 11px; color: #333; margin-bottom: 4px; text-align: left;">用户名</div>
+              <input style="width: 100%; padding: 10px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 13px; box-sizing: border-box;" placeholder="请输入用户名" />
+            </div>
+            <div style="margin-bottom: 20px;">
+              <div style="font-size: 11px; color: #333; margin-bottom: 4px; text-align: left;">密码</div>
+              <input type="password" style="width: 100%; padding: 10px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 13px; box-sizing: border-box;" placeholder="请输入密码" />
+            </div>
+            <button style="width: 100%; padding: 10px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer;">登 录</button>
+            <div style="margin-top: 16px; font-size: 12px; color: #999; text-align: center;">
+              还没有账号？<span style="color: #667eea; cursor: pointer;">立即注册 →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mockup">
+      <div class="mockup-header">注册页</div>
+      <div class="mockup-body">
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; text-align: center; min-height: 320px; display: flex; align-items: center; justify-content: center;">
+          <div style="background: white; border-radius: 16px; padding: 32px 28px; width: 320px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);">
+            <div style="font-size: 22px; font-weight: 700; margin-bottom: 4px; color: #1a1a2e;">✨ 创建账号</div>
+            <div style="font-size: 12px; color: #999; margin-bottom: 24px;">加入用户中心</div>
+            <div style="margin-bottom: 10px;">
+              <div style="font-size: 11px; color: #333; margin-bottom: 4px; text-align: left;">用户名</div>
+              <input style="width: 100%; padding: 10px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 13px; box-sizing: border-box;" placeholder="3-32位用户名" />
+            </div>
+            <div style="margin-bottom: 10px;">
+              <div style="font-size: 11px; color: #333; margin-bottom: 4px; text-align: left;">昵称</div>
+              <input style="width: 100%; padding: 10px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 13px; box-sizing: border-box;" placeholder="可选" />
+            </div>
+            <div style="margin-bottom: 10px;">
+              <div style="font-size: 11px; color: #333; margin-bottom: 4px; text-align: left;">密码</div>
+              <input type="password" style="width: 100%; padding: 10px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 13px; box-sizing: border-box;" placeholder="6-32位密码" />
+            </div>
+            <button style="width: 100%; padding: 10px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 6px;">注 册</button>
+            <div style="margin-top: 14px; font-size: 12px; color: #999; text-align: center;">
+              已有账号？<span style="color: #667eea; cursor: pointer;">去登录 →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 28px;">
+  <h3>📊 Dashboard 页</h3>
+  <p style="font-size: 13px; color: #666; margin-bottom: 12px;">统计卡片 + 数据概览，作为登录后的首页</p>
+  <div class="mockup">
+    <div class="mockup-header">Dashboard 布局</div>
+    <div class="mockup-body">
+      <div style="background: #f0f2f5; padding: 20px; border-radius: 8px;">
+        <div style="font-size: 16px; font-weight: 600; color: #1a1a2e; margin-bottom: 16px;">📈 数据概览</div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px;">
+          <div style="background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 12px; padding: 20px; color: white;">
+            <div style="font-size: 12px; opacity: 0.85;">总用户数</div>
+            <div style="font-size: 28px; font-weight: 700; margin: 6px 0;">1,234</div>
+            <div style="font-size: 11px; opacity: 0.7;">↑ 12% 较上月</div>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 20px; border: 1px solid #e8e8e8;">
+            <div style="font-size: 12px; color: #999;">活跃用户</div>
+            <div style="font-size: 28px; font-weight: 700; color: #333; margin: 6px 0;">892</div>
+            <div style="font-size: 11px; color: #52c41a;">↑ 5% 较上月</div>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 20px; border: 1px solid #e8e8e8;">
+            <div style="font-size: 12px; color: #999;">今日新增</div>
+            <div style="font-size: 28px; font-weight: 700; color: #333; margin: 6px 0;">56</div>
+            <div style="font-size: 11px; color: #ff4d4f;">↓ 3% 较昨日</div>
+          </div>
+        </div>
+        <div style="background: white; border-radius: 12px; padding: 20px; border: 1px solid #e8e8e8;">
+          <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">⚡ 快捷操作</div>
+          <div style="display: flex; gap: 12px;">
+            <button style="padding: 8px 18px; border: 1px solid #667eea; color: #667eea; background: white; border-radius: 8px; font-size: 13px; cursor: pointer;">👥 查看用户列表</button>
+            <button style="padding: 8px 18px; border: 1px solid #667eea; color: #667eea; background: white; border-radius: 8px; font-size: 13px; cursor: pointer;">👤 编辑个人资料</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 28px;">
+  <h3>👥 用户列表页</h3>
+  <p style="font-size: 13px; color: #666; margin-bottom: 12px;">Element Plus el-table + el-pagination + 搜索 + 删除确认</p>
+  <div class="mockup">
+    <div class="mockup-header">用户管理列表</div>
+    <div class="mockup-body">
+      <div style="background: #f0f2f5; padding: 20px; border-radius: 8px;">
+        <div style="background: white; border-radius: 12px; overflow: hidden; border: 1px solid #e8e8e8;">
+          <!-- Header -->
+          <div style="padding: 16px 20px; border-bottom: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-size: 15px; font-weight: 600;">👥 用户管理</div>
+            <input style="padding: 6px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 12px; width: 200px;" placeholder="🔍 搜索用户名..." />
+          </div>
+          <!-- Table -->
+          <table style="width: 100%; font-size: 12px; border-collapse: collapse;">
+            <tr style="background: #fafafa; border-bottom: 1px solid #e8e8e8;">
+              <th style="padding: 10px 16px; text-align: left; color: #999; font-weight: 500;">ID</th>
+              <th style="padding: 10px 16px; text-align: left; color: #999; font-weight: 500;">用户名</th>
+              <th style="padding: 10px 16px; text-align: left; color: #999; font-weight: 500;">昵称</th>
+              <th style="padding: 10px 16px; text-align: left; color: #999; font-weight: 500;">邮箱</th>
+              <th style="padding: 10px 16px; text-align: left; color: #999; font-weight: 500;">注册时间</th>
+              <th style="padding: 10px 16px; text-align: left; color: #999; font-weight: 500;">操作</th>
+            </tr>
+            <tr style="border-bottom: 1px solid #f5f5f5;">
+              <td style="padding: 10px 16px; color: #667eea;">1</td>
+              <td style="padding: 10px 16px; font-weight: 500;">admin</td>
+              <td style="padding: 10px 16px;">管理员</td>
+              <td style="padding: 10px 16px;">admin@example.com</td>
+              <td style="padding: 10px 16px; color: #999;">2026-06-01</td>
+              <td style="padding: 10px 16px;"><span style="color: #ff4d4f; cursor: pointer; font-size: 12px;">删除</span></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #f5f5f5;">
+              <td style="padding: 10px 16px; color: #667eea;">2</td>
+              <td style="padding: 10px 16px; font-weight: 500;">zhangsan</td>
+              <td style="padding: 10px 16px;">张三</td>
+              <td style="padding: 10px 16px;">zhang@example.com</td>
+              <td style="padding: 10px 16px; color: #999;">2026-06-05</td>
+              <td style="padding: 10px 16px;"><span style="color: #ff4d4f; cursor: pointer; font-size: 12px;">删除</span></td>
+            </tr>
+          </table>
+          <!-- Pagination -->
+          <div style="padding: 12px 20px; border-top: 1px solid #f0f0f0; display: flex; justify-content: flex-end; align-items: center; gap: 8px; font-size: 12px; color: #666;">
+            <span>共 100 条</span>
+            <span style="padding: 4px 10px; border: 1px solid #e0e0e0; border-radius: 6px; cursor: pointer;">&lt;</span>
+            <span style="padding: 4px 10px; background: #667eea; color: white; border-radius: 6px;">1</span>
+            <span style="padding: 4px 10px; border: 1px solid #e0e0e0; border-radius: 6px; cursor: pointer;">2</span>
+            <span style="padding: 4px 10px; border: 1px solid #e0e0e0; border-radius: 6px; cursor: pointer;">3</span>
+            <span style="padding: 4px 10px; border: 1px solid #e0e0e0; border-radius: 6px; cursor: pointer;">&gt;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 28px;">
+  <h3>👤 个人中心页</h3>
+  <p style="font-size: 13px; color: #666; margin-bottom: 12px;">左侧信息卡片 + 右侧编辑表单，el-descriptions + el-form</p>
+  <div class="mockup">
+    <div class="mockup-header">个人中心 - 查看模式 → 点击编辑切换为编辑模式</div>
+    <div class="mockup-body">
+      <div style="background: #f0f2f5; padding: 20px; border-radius: 8px;">
+        <div style="display: flex; gap: 20px;">
+          <!-- Left: Avatar card -->
+          <div style="width: 200px; background: white; border-radius: 12px; padding: 24px; text-align: center; border: 1px solid #e8e8e8; flex-shrink: 0;">
+            <div style="width: 72px; height: 72px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 28px; color: white;">A</div>
+            <div style="font-weight: 600; font-size: 15px;">admin</div>
+            <div style="font-size: 12px; color: #999; margin: 4px 0;">管理员</div>
+            <div style="font-size: 11px; color: #667eea; margin-top: 12px;">admin@example.com</div>
+          </div>
+          <!-- Right: Info + Edit -->
+          <div style="flex: 1; background: white; border-radius: 12px; padding: 24px; border: 1px solid #e8e8e8;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <div style="font-size: 15px; font-weight: 600;">基本信息</div>
+              <button style="padding: 6px 16px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 8px; font-size: 12px; cursor: pointer;">✏️ 编辑</button>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; font-size: 13px;">
+              <div><span style="color: #999;">用户名</span><br/><span style="font-weight: 500;">admin</span></div>
+              <div><span style="color: #999;">昵称</span><br/><span style="font-weight: 500;">管理员</span></div>
+              <div><span style="color: #999;">邮箱</span><br/><span style="font-weight: 500;">admin@example.com</span></div>
+              <div><span style="color: #999;">手机</span><br/><span style="font-weight: 500; color: #ccc;">未设置</span></div>
+              <div><span style="color: #999;">注册时间</span><br/><span style="font-weight: 500;">2026-06-01 10:00</span></div>
+              <div><span style="color: #999;">状态</span><br/><span style="color: #52c41a; font-weight: 500;">● 正常</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
