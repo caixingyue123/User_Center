@@ -1,0 +1,84 @@
+:root {
+  --primary-start: #667eea;
+  --primary-end: #764ba2;
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --sidebar-bg: #1a1a2e;
+  --sidebar-bg-end: #16213e;
+  --sidebar-text: #8890a0;
+  --sidebar-active: #a78bfa;
+  --content-bg: #f0f2f5;
+  --card-radius: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #app {
+  height: 100%;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Element Plus overrides */
+.el-button--primary {
+  background: var(--primary-gradient) !important;
+  border: none !important;
+}
+
+.el-menu-item.is-active {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2)) !important;
+  color: var(--sidebar-active) !important;
+}
+
+/* Login / Register fullscreen gradient */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-gradient);
+}
+
+.auth-card {
+  background: white;
+  border-radius: 16px;
+  padding: 40px 36px;
+  width: 400px;
+  max-width: 90vw;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.auth-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a2e;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.auth-subtitle {
+  font-size: 13px;
+  color: #999;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.auth-link {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 13px;
+  color: #999;
+}
+
+.auth-link a {
+  color: #667eea;
+  text-decoration: none;
+  cursor: pointer;
+}
