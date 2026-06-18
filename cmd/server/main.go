@@ -14,8 +14,12 @@ func main() {
 	if err != nil {
 		log.Fatal("MYSQL 连接失败：", err)
 	}
+	redisClient, err := db.InitRedis()
+	if err != nil {
+		log.Println("Redis 连接失败，将跳过缓存：", err)
+	}
 	userRepo := repository.NewUserRepository(database)
-	userService := service.NewUserService(userRepo)
+	userService := service.NewUserService(userRepo, redisClient)
 	userController := controller.NewUserController(userService)
 	r := router.InitRouter(userController)
 	if err := r.Run(":8080"); err != nil {

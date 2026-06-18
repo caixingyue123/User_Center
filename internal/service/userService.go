@@ -1,23 +1,47 @@
 package service
 
 import (
+	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"time"
 	"user/internal/model"
 	"user/internal/repository"
 	"user/internal/request"
 
+	"github.com/redis/go-redis/v9"
 	"golang.org/x/crypto/bcrypt"
 )
 
+const userInfoCacheTTL = 30 * time.Minute
+
 type UserService struct {
-	userRepo *repository.UserRepository
+	userRepo    *repository.UserRepository
+	redisClient *redis.Client
 }
 
-func NewUserService(userRepo *repository.UserRepository) *UserService {
+func NewUserService(userRepo *repository.UserRepository, redisClient *redis.Client) *UserService {
 	return &UserService{
-		userRepo: userRepo,
+		userRepo:    userRepo,
+		redisClient: redisClient,
 	}
+}
+
+func userInfoCacheKey(id int64) string {
+	return fmt.Sprintf("user:info:%d", id)
+}
+
+func parseCachedUser(cacheValue string) (*model.User, bool) {
+	var user model.User
+	if err := json.Unmarshal([]byte(cacheValue), &user); err != nil {
+		return nil, false
+	}
+	return &user, true
+}
+
+func marshalCachedUser(user *model.User) ([]byte, error) {
+	return json.Marshal(user)
 }
 
 func (s *UserService) Register(req *request.RegisterReq) (*model.User, error) {
@@ -76,12 +100,36 @@ func (s *UserService) UpdateProfile(id int64, req *request.UpdateProfileReq) err
 	if err != nil {
 		return err
 	}
-	return s.userRepo.UpdateProfile(id, req.Nickname, req.Email, req.Phone, req.Avatar)
-
+	if err := s.userRepo.UpdateProfile(id, req.Nickname, req.Email, req.Phone, req.Avatar); err != nil {
+		return err
+	}
+	s.deleteUserInfoCache(id)
+	return nil
 }
 
 func (s *UserService) GetByID(id int64) (*model.User, error) {
-	return s.userRepo.GetByID(id)
+	ctx := context.Background()
+	cacheKey := userInfoCacheKey(id)
+
+	if s.redisClient != nil {
+		cacheValue, err := s.redisClient.Get(ctx, cacheKey).Result()
+		if err == nil {
+			if user, ok := parseCachedUser(cacheValue); ok {
+				return user, nil
+			}
+		}
+	}
+	user, err := s.userRepo.GetByID(id)
+	if err != nil {
+		return nil, err
+	}
+	if s.redisClient != nil {
+		cacheBytes, err := marshalCachedUser(user)
+		if err == nil {
+			_ = s.redisClient.Set(ctx, cacheKey, cacheBytes, userInfoCacheTTL).Err()
+		}
+	}
+	return user, nil
 }
 
 func (s *UserService) List(page, pageSize int) ([]model.User, int64, error) {
@@ -89,5 +137,16 @@ func (s *UserService) List(page, pageSize int) ([]model.User, int64, error) {
 }
 
 func (s *UserService) DeleteByID(id int64) error {
-	return s.userRepo.DeleteByID(id)
+	if err := s.userRepo.DeleteByID(id); err != nil {
+		return err
+	}
+	s.deleteUserInfoCache(id)
+	return nil
+}
+
+func (s *UserService) deleteUserInfoCache(id int64) {
+	if s.redisClient == nil {
+		return
+	}
+	_ = s.redisClient.Del(context.Background(), userInfoCacheKey(id)).Err()
 }
