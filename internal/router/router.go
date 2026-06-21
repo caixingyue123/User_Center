@@ -1,6 +1,7 @@
 package router
 
 import (
+	"time"
 	"user/internal/controller"
 	"user/internal/middleware"
 
@@ -12,6 +13,7 @@ func InitRouter(userController *controller.UserController) *gin.Engine {
 
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
+	r.Use(middleware.RateLimit(60, time.Minute))
 	api := r.Group("/api/v1")
 	{
 		api.POST("/register", userController.Register)
